@@ -1,0 +1,40 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "uxntal",
+      "camelcase": "Uxntal",
+      "title": "Uxntal",
+      "scope": "source.uxntal",
+      "file-types": [
+        "tal"
+      ],
+      "injection-regex": "^uxntal$",
+      "class-name": "TreeSitterUxntal"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "A programming language for the Uxn virtual machine",
+    "authors": [
+      {
+        "name": "Tyler Gardner",
+        "email": "code@tylergardner.org",
+        "url": "https://tylergardner.org/"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/TicTocCroc/tree-sitter-uxntal"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

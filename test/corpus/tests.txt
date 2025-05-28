@@ -1,0 +1,11 @@
+=================
+Include statement
+=================
+
+~assets.tal
+
+---
+
+(source_file
+  (include)
+)
