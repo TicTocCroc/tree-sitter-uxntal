@@ -9,3 +9,177 @@ Include statement
 (source_file
   (include)
 )
+
+=========
+Constant
+=========
+
+|10
+@limit
+
+---
+
+(source_file
+      (constant
+        (absolute_padding)
+        (scope)))
+
+==============
+Constant Error
+==============
+
+| 10
+@limit
+
+---
+
+(source_file
+      (ERROR
+        (hex_number)
+        (scope)))
+
+=========
+label
+=========
+
+|00
+@Suit &clubs $1
+
+|10
+@Animal &tiger $1 &lion $1
+
+|10
+@Grade &passing $1 &failing $1 &excelling $1
+
+|00 @Dice/one $1 &two $1 &three $1 &four $1
+
+|01
+@Scope1 $1
+@Scope2 &sub11 $1 &sub12 $1 &sub13 $2
+@Scope3/sub21 $1 &sub22 $2
+
+---
+
+(source_file
+      (label_sublabel_data
+        (absolute_padding)
+        (scope)
+        (sublabel_data
+          (sublabel)
+          (relative_padding)))
+      (label_sublabel_data
+        (absolute_padding)
+        (scope)
+        (sublabel_data
+          (sublabel)
+          (relative_padding))
+        (sublabel_data
+          (sublabel)
+          (relative_padding)))
+      (label_sublabel_data
+        (absolute_padding)
+        (scope)
+        (sublabel_data
+          (sublabel)
+          (relative_padding))
+        (sublabel_data
+          (sublabel)
+          (relative_padding))
+        (sublabel_data
+          (sublabel)
+          (relative_padding)))
+      (label_sublabel_data
+        (absolute_padding)
+        (scope)
+        (sublabel_data
+          (sublabel)
+          (relative_padding))
+        (sublabel_data
+          (sublabel)
+          (relative_padding))
+        (sublabel_data
+          (sublabel)
+          (relative_padding))
+        (sublabel_data
+          (sublabel)
+          (relative_padding)))
+      (label_data
+        (absolute_padding)
+        (scope)
+        (relative_padding))
+      (label_sublabel_data
+        (scope)
+        (sublabel_data
+          (sublabel)
+          (relative_padding))
+        (sublabel_data
+          (sublabel)
+          (relative_padding))
+        (sublabel_data
+          (sublabel)
+          (relative_padding)))
+      (label_sublabel_data
+        (scope)
+        (sublabel_data
+          (sublabel)
+          (relative_padding))
+        (sublabel_data
+          (sublabel)
+          (relative_padding))))
+
+====
+Data
+====
+
+@sprite 00 00 00 00  00 00 00 00
+
+---
+
+(source_file
+      (data
+        (scope)
+        (hex_number)
+        (hex_number)
+        (hex_number)
+        (hex_number)
+        (hex_number)
+        (hex_number)
+        (hex_number)
+        (hex_number)))
+
+=====
+Macro
+=====
+
+%MACRO1 { LIT2r }
+%MACRO2 { DUP DUP2 DUPk DUPr DUP2r }
+
+---
+
+(source_file
+      (macro
+        (statement
+          (opcode
+            (immediate_opcode
+              (literal_opcode)))))
+      (macro
+        (statement
+          (opcode
+            (base_opcode)
+            (opcode_mode)))
+        (statement
+          (opcode
+            (base_opcode)
+            (opcode_mode)))
+        (statement
+          (opcode
+            (base_opcode)
+            (opcode_mode)))
+        (statement
+          (opcode
+            (base_opcode)
+            (opcode_mode)))
+        (statement
+          (opcode
+            (base_opcode)
+            (opcode_mode)))))
