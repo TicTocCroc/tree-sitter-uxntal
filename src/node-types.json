@@ -5,6 +5,21 @@
     "fields": {}
   },
   {
+    "type": "address",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "address_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "base_opcode",
     "named": true,
     "fields": {}
@@ -37,11 +52,15 @@
       "required": true,
       "types": [
         {
-          "type": "hex_number",
+          "type": "raw_data",
           "named": true
         },
         {
           "type": "scope",
+          "named": true
+        },
+        {
+          "type": "sublabel",
           "named": true
         }
       ]
@@ -109,6 +128,11 @@
     }
   },
   {
+    "type": "literal_hex_number",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "literal_opcode",
     "named": true,
     "fields": {}
@@ -146,6 +170,29 @@
         },
         {
           "type": "opcode_mode",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "raw_data",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ascii",
+          "named": true
+        },
+        {
+          "type": "hex_number",
+          "named": true
+        },
+        {
+          "type": "relative_padding",
           "named": true
         }
       ]
@@ -206,7 +253,27 @@
       "required": true,
       "types": [
         {
+          "type": "address",
+          "named": true
+        },
+        {
+          "type": "ascii",
+          "named": true
+        },
+        {
+          "type": "hex_number",
+          "named": true
+        },
+        {
+          "type": "literal_hex_number",
+          "named": true
+        },
+        {
           "type": "opcode",
+          "named": true
+        },
+        {
+          "type": "sublabel_data",
           "named": true
         }
       ]
@@ -235,6 +302,10 @@
         }
       ]
     }
+  },
+  {
+    "type": "#",
+    "named": false
   },
   {
     "type": "$",
@@ -403,6 +474,14 @@
   {
     "type": "SWP",
     "named": false
+  },
+  {
+    "type": "address_prefix",
+    "named": true
+  },
+  {
+    "type": "ascii",
+    "named": true
   },
   {
     "type": "hex_number",

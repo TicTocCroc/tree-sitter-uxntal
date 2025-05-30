@@ -30,6 +30,10 @@
           {
             "type": "SYMBOL",
             "name": "macro"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "routine"
           }
         ]
       }
@@ -100,6 +104,27 @@
     "hex_number": {
       "type": "PATTERN",
       "value": "[0-9a-f]+"
+    },
+    "literal_hex_number": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "#"
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "[0-9a-f]+"
+            },
+            "named": true,
+            "value": "hex_number"
+          }
+        }
+      ]
     },
     "label_data": {
       "type": "SEQ",
@@ -254,13 +279,55 @@
           "name": "scope"
         },
         {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "hex_number"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "raw_data"
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "sublabel"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "raw_data"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ]
+    },
+    "raw_data": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "ascii"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "hex_number"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "relative_padding"
+            }
+          ]
+        }
+      }
     },
     "macro": {
       "type": "SEQ",
@@ -308,6 +375,26 @@
         {
           "type": "SYMBOL",
           "name": "opcode"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hex_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "literal_hex_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "sublabel_data"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "address"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ascii"
         }
       ]
     },
@@ -532,9 +619,111 @@
         }
       ]
     },
-    "runes": {
+    "address_prefix": {
       "type": "PATTERN",
-      "value": "[|$@&,_.-;=!?#\\\"%~]"
+      "value": "[,\\.;!_\\-=\\?]"
+    },
+    "address": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "address_prefix"
+        },
+        {
+          "type": "PREC_RIGHT",
+          "value": 0,
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "PREC",
+                    "value": -1,
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[^\\s\\/]+"
+                    }
+                  },
+                  "named": true,
+                  "value": "identifier"
+                }
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "PREC",
+                        "value": -1,
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "[^\\s\\/]+"
+                        }
+                      },
+                      "named": true,
+                      "value": "identifier"
+                    }
+                  },
+                  {
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "STRING",
+                      "value": "/"
+                    }
+                  },
+                  {
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "PREC",
+                        "value": -1,
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "[^\\s\\/]+"
+                        }
+                      },
+                      "named": true,
+                      "value": "identifier"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "ascii": {
+      "type": "PATTERN",
+      "value": "\"[!-~]+"
+    },
+    "routine": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "scope"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "SYMBOL",
+              "name": "statement"
+            }
+          }
+        }
+      ]
     },
     "identifier": {
       "type": "PREC",
@@ -547,8 +736,24 @@
   },
   "extras": [
     {
+      "type": "STRING",
+      "value": "["
+    },
+    {
+      "type": "STRING",
+      "value": "]"
+    },
+    {
+      "type": "STRING",
+      "value": "("
+    },
+    {
+      "type": "STRING",
+      "value": ")"
+    },
+    {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "[\\t\\n ]"
     }
   ],
   "conflicts": [],

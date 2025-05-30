@@ -19,7 +19,8 @@ module.exports = grammar({
         $.label_data,
         $.label_sublabel_data,
         $.data,
-        $.macro
+        $.macro,
+        $.routine
       )
     ),
 
@@ -32,6 +33,8 @@ module.exports = grammar({
     scope: $ => seq('@', token.immediate(alias(prec(-1, /[^\s\/]+/), $.identifier))),
 
     hex_number: _ => /[0-9a-f]+/,
+
+    literal_hex_number: $ => seq('#', token.immediate(alias(/[0-9a-f]+/, $.hex_number))),
 
     label_data: $ => seq(optional($.absolute_padding), $.scope, $.relative_padding),
 
@@ -46,12 +49,19 @@ module.exports = grammar({
 
     relative_padding: $ => seq('$', token.immediate(alias(/[0-9a-f]+/, $.hex_number))),
 
-    data: $ => seq($.scope, repeat1($.hex_number)),
+    data: $ => seq($.scope, choice($.raw_data, repeat1(seq($.sublabel, $.raw_data)))),
+
+    raw_data: $ => repeat1(prec(-1, choice($.ascii, $.hex_number, $.relative_padding))),
 
     macro: $ => seq('%', token.immediate(alias(prec(-1, /[^\s\/]+/), $.identifier)), '{', repeat($.statement), '}'),
 
     statement: $ => choice(
-      $.opcode
+      $.opcode,
+      $.hex_number,
+      $.literal_hex_number,
+      $.sublabel_data,
+      $.address,
+      $.ascii
     ),
 
     opcode: $ => choice(seq($.base_opcode, optional($.opcode_mode)), $.immediate_opcode),
@@ -97,8 +107,31 @@ module.exports = grammar({
 
     literal_opcode: _ => seq('LIT', optional('2'), optional('r')),
 
-    runes: _ => /[|$@&,_.-;=!?#\"%~]/,
+    address_prefix: _ => /[,\.;!_\-=\?]/,
+
+    address: $ => seq(
+      $.address_prefix,
+      prec.right(
+        choice(
+          token.immediate(alias(prec(-1, /[^\s\/]+/), $.identifier)),
+          seq(
+            token.immediate(alias(prec(-1, /[^\s\/]+/), $.identifier)),
+            token.immediate('/'),
+            token.immediate(alias(prec(-1, /[^\s\/]+/), $.identifier))
+          ),
+        )
+      )
+    ),
+
+    ascii: _ => /"[!-~]+/,
+
+    routine: $ => seq(
+      $.scope,
+      repeat1($.statement)
+    ),
 
     identifier: _ => prec(-1, /[^\s\/]+/),
-  }
+  },
+
+  extras: _ => ['[', ']', '(' , ')', /[\t\n ]/]
 });
