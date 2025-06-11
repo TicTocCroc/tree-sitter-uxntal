@@ -1,371 +1,204 @@
-=================
-Include statement
-=================
+=========
+Routine 1
+=========
+
+@<emit>
+		Result/get #20 EQU ?&ignore
+
+---
+
+(source_file
+      (scope)
+      (subroutine_or_macro)
+      (literal_hex_number)
+      (opcode)
+      (address))
+
+=========
+Routine 2
+=========
+
+@<emit>
+	( ws ws ) Result/get-last #20 EQU ?&ignore
+
+---
+
+(source_file
+      (scope)
+      (comment)
+      (subroutine_or_macro)
+      (literal_hex_number)
+      (opcode)
+      (address))
+
+=========
+Routine 3
+=========
+
+@<emit>
+	DUP ?{ POP JMP2r }
+	DUP #20 NEQ ?{
+		( ws ws ) Result/get-last #20 EQU ?&ignore
+		( tb ws ) Result/get-last #09 EQU ?&ignore }
+	DUP #0a NEQ ?{
+		( ws lb <- ) Result/get-last #20 NEQ ?{ Result/rew }
+		( tb lb <- ) Result/get-last #09 NEQ ?{ Result/rew }
+		[ LIT &lb $1 ] INCk ,&lb STR
+		#02 LTH ?Result/put
+		POP JMP2r }
+	Result/put [ LIT2 00 _&lb ] STR
+	JMP2r
+
+	&ignore ( c last -- )
+	POP JMP2r
+
+---
+
+(source_file
+      (scope)
+      (opcode)
+      (closure)
+      (opcode)
+      (opcode)
+      (closure)
+      (opcode)
+      (literal_hex_number)
+      (opcode)
+      (closure)
+      (comment)
+      (subroutine_or_macro)
+      (literal_hex_number)
+      (opcode)
+      (address)
+      (comment)
+      (subroutine_or_macro)
+      (literal_hex_number)
+      (opcode)
+      (address)
+      (closure)
+      (opcode)
+      (literal_hex_number)
+      (opcode)
+      (closure)
+      (comment)
+      (subroutine_or_macro)
+      (literal_hex_number)
+      (opcode)
+      (closure)
+      (subroutine_or_macro)
+      (closure)
+      (comment)
+      (subroutine_or_macro)
+      (literal_hex_number)
+      (opcode)
+      (closure)
+      (subroutine_or_macro)
+      (closure)
+      (bracket)
+      (opcode)
+      (detached_sublabel)
+      (relative_padding)
+      (bracket)
+      (opcode)
+      (address)
+      (opcode)
+      (literal_hex_number)
+      (opcode)
+      (address)
+      (opcode)
+      (opcode)
+      (closure)
+      (subroutine_or_macro)
+      (bracket)
+      (opcode)
+      (hex_number)
+      (address)
+      (bracket)
+      (opcode)
+      (opcode)
+      (detached_sublabel)
+      (comment)
+      (opcode)
+      (opcode))
+
+=========
+Routine 4
+=========
 
 ~assets.tal
 
----
-
-(source_file
-  (include)
-)
-
-=========
-Constant
-=========
-
-|10
-@limit
+@src/on-console-live ( -> )
+	.Console/read DEI DUP #20 GTH ?{
+		POP <format-file>
+		;dict/bound <sprint>
+		;/buf <sprint>
+		;on-console .Console/vector DEO2
+		BRK }
+	/<append>
+	BRK
 
 ---
 
 (source_file
-      (constant
-        (absolute_padding)
-        (scope)))
-
-==============
-Constant Error
-==============
-
-| 10
-@limit
-
----
-
-(source_file
-      (ERROR
-        (hex_number)
-        (scope)))
-
-=========
-label
-=========
-
-|00
-@Suit &clubs $1
-
-|10
-@Animal &tiger $1 &lion $1
-
-|10
-@Grade &passing $1 &failing $1 &excelling $1
-
-|00 @Dice/one $1 &two $1 &three $1 &four $1
-
-|01
-@Scope1 $1
-@Scope2 &sub11 $1 &sub12 $1 &sub13 $2
-@Scope3/sub21 $1 &sub22 $2
-
----
-
-(source_file
-      (label_sublabel_data
-        (absolute_padding)
-        (scope)
-        (sublabel_data
-          (sublabel)
-          (relative_padding)))
-      (label_sublabel_data
-        (absolute_padding)
-        (scope)
-        (sublabel_data
-          (sublabel)
-          (relative_padding))
-        (sublabel_data
-          (sublabel)
-          (relative_padding)))
-      (label_sublabel_data
-        (absolute_padding)
-        (scope)
-        (sublabel_data
-          (sublabel)
-          (relative_padding))
-        (sublabel_data
-          (sublabel)
-          (relative_padding))
-        (sublabel_data
-          (sublabel)
-          (relative_padding)))
-      (label_sublabel_data
-        (absolute_padding)
-        (scope)
-        (sublabel_data
-          (sublabel)
-          (relative_padding))
-        (sublabel_data
-          (sublabel)
-          (relative_padding))
-        (sublabel_data
-          (sublabel)
-          (relative_padding))
-        (sublabel_data
-          (sublabel)
-          (relative_padding)))
-      (label_data
-        (absolute_padding)
-        (scope)
-        (relative_padding))
-      (label_sublabel_data
-        (scope)
-        (sublabel_data
-          (sublabel)
-          (relative_padding))
-        (sublabel_data
-          (sublabel)
-          (relative_padding))
-        (sublabel_data
-          (sublabel)
-          (relative_padding)))
-      (label_sublabel_data
-        (scope)
-        (sublabel_data
-          (sublabel)
-          (relative_padding))
-        (sublabel_data
-          (sublabel)
-          (relative_padding))))
+      (include)
+      (scope)
+      (comment)
+      (address)
+      (opcode)
+      (opcode)
+      (literal_hex_number)
+      (opcode)
+      (closure)
+      (opcode)
+      (subroutine_or_macro)
+      (address)
+      (subroutine_or_macro)
+      (address)
+      (subroutine_or_macro)
+      (address)
+      (address)
+      (opcode)
+      (opcode)
+      (closure)
+      (subroutine_or_macro)
+      (opcode))
 
 ====
 Data
 ====
 
-@sprite 00 00 00 00  00 00 00 00
+@meta $1
+	( name ) "Uxnfor 0a
+	( desc ) "Uxntal 20 "Formatter 0a
+	( auth ) "By 20 "Devine 20 "Lu 20 "Linvega 0a
+	( date ) "2 20 "May 20 "2025 $2
 
 ---
 
 (source_file
-      (data
-        (scope)
-        (raw_data
-          (hex_number)
-          (hex_number)
-          (hex_number)
-          (hex_number)
-          (hex_number)
-          (hex_number)
-          (hex_number)
-          (hex_number))))
-
-=========
-More Data
-=========
-
-@dict
-	&usage "usage: 20 "uxnfor.rom 20 "source.tal 0a $1
-	&err "!! 20 "Error: 20 "Scope 20 "too 20 "large: 20 $1
-	&bound "bound: 20 $1
-	&deo "DEO $1
-	&sta "STA $1
-	&stz "STZ $1
-	&str "STR $1
-	&sth "STH 20 $1
-	&sth2 "STH2 20 $1
-	&jmp "JMP $1
-	&jcn "JCN $1 20
-	&brk "BRK $1
-
----
-
-(source_file
-      (data
-        (scope)
-        (sublabel)
-        (raw_data
-          (ascii)
-          (hex_number)
-          (ascii)
-          (hex_number)
-          (ascii)
-          (hex_number)
-          (relative_padding))
-        (sublabel)
-        (raw_data
-          (ascii)
-          (hex_number)
-          (ascii)
-          (hex_number)
-          (ascii)
-          (hex_number)
-          (ascii)
-          (hex_number)
-          (ascii)
-          (hex_number)
-          (relative_padding))
-        (sublabel)
-        (raw_data
-          (ascii)
-          (hex_number)
-          (relative_padding))
-        (sublabel)
-        (raw_data
-          (ascii)
-          (relative_padding))
-        (sublabel)
-        (raw_data
-          (ascii)
-          (relative_padding))
-        (sublabel)
-        (raw_data
-          (ascii)
-          (relative_padding))
-        (sublabel)
-        (raw_data
-          (ascii)
-          (relative_padding))
-        (sublabel)
-        (raw_data
-          (ascii)
-          (hex_number)
-          (relative_padding))
-        (sublabel)
-        (raw_data
-          (ascii)
-          (hex_number)
-          (relative_padding))
-        (sublabel)
-        (raw_data
-          (ascii)
-          (relative_padding))
-        (sublabel)
-        (raw_data
-          (ascii)
-          (relative_padding)
-          (hex_number))
-        (sublabel)
-        (raw_data
-          (ascii)
-          (relative_padding))))
-
-=====
-Macro
-=====
-
-%MACRO1 { LIT2r [ ff ] #01 ADD }
-%MACRO1 { LIT2r [ &door $2 ] #01 ADD }
-%MACRO2 { DUP DUP2 DUPk DUPr DUP2r }
-%MACRO2 { ;routine DUP DUP2 DUPk DUPr ,&sublabel DUP2r }
-%MACRO2 { =Scope/sublabel DUP DUP2 DUPk DUPr }
-%MACRO2 { "Hi DEO }
-
----
-
-(source_file
-      (macro
-        (statement
-          (opcode
-            (immediate_opcode
-              (literal_opcode))))
-        (statement
-          (hex_number))
-        (statement
-          (literal_hex_number))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode))))
-      (macro
-        (statement
-          (opcode
-            (immediate_opcode
-              (literal_opcode))))
-        (statement
-          (sublabel_data
-            (sublabel)
-            (relative_padding)))
-        (statement
-          (literal_hex_number))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode))))
-      (macro
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode)))
-        (statement
-          (opcode
-            (base_opcode)))
-        (statement
-          (hex_number))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode)))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode)))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode))))
-      (macro
-        (statement
-          (address
-            (address_prefix)))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode)))
-        (statement
-          (opcode
-            (base_opcode)))
-        (statement
-          (hex_number))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode)))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode)))
-        (statement
-          (address
-            (address_prefix)))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode))))
-      (macro
-        (statement
-          (address
-            (address_prefix)))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode)))
-        (statement
-          (opcode
-            (base_opcode)))
-        (statement
-          (hex_number))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode)))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode))))
-      (macro
-        (statement
-          (ascii))
-        (statement
-          (opcode
-            (base_opcode)
-            (opcode_mode)))))
-
-=======
-Routine
-=======
-
-@on-reset
-  #20 #18 DEOk
-  draw!
-  BRK
-
----
+      (scope)
+      (relative_padding)
+      (comment)
+      (ascii)
+      (hex_number)
+      (comment)
+      (ascii)
+      (hex_number)
+      (ascii)
+      (hex_number)
+      (comment)
+      (ascii)
+      (hex_number)
+      (ascii)
+      (hex_number)
+      (ascii)
+      (hex_number)
+      (ascii)
+      (hex_number)
+      (comment)
+      (ascii)
+      (hex_number)
+      (ascii)
+      (hex_number)
+      (ascii)
+      (relative_padding))

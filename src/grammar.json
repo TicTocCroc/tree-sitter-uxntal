@@ -9,426 +9,80 @@
         "members": [
           {
             "type": "SYMBOL",
+            "name": "scope"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "opcode"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "hex_number"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "literal_hex_number"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "ascii"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "address"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "detached_sublabel"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "subroutine_or_macro"
+          },
+          {
+            "type": "SYMBOL",
             "name": "include"
           },
           {
             "type": "SYMBOL",
-            "name": "constant"
+            "name": "comment"
           },
           {
             "type": "SYMBOL",
-            "name": "label_data"
+            "name": "bracket"
           },
           {
             "type": "SYMBOL",
-            "name": "label_sublabel_data"
+            "name": "closure"
           },
           {
             "type": "SYMBOL",
-            "name": "data"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "macro"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "routine"
+            "name": "relative_padding"
           }
         ]
       }
     },
     "include": {
       "type": "PATTERN",
-      "value": "~[\\w\\.]+"
+      "value": "~[^\\s]+"
     },
-    "constant": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "absolute_padding"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "scope"
-        }
-      ]
+    "comment": {
+      "type": "PATTERN",
+      "value": "\\(.*\\)"
     },
-    "absolute_padding": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "|"
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "PATTERN",
-              "value": "[0-9a-f]+"
-            },
-            "named": true,
-            "value": "hex_number"
-          }
-        }
-      ]
+    "bracket": {
+      "type": "PATTERN",
+      "value": "[\\[\\]]"
+    },
+    "closure": {
+      "type": "PATTERN",
+      "value": "\\?\\{|\\}"
     },
     "scope": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@"
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "PREC",
-              "value": -1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[^\\s\\/]+"
-              }
-            },
-            "named": true,
-            "value": "identifier"
-          }
-        }
-      ]
-    },
-    "hex_number": {
       "type": "PATTERN",
-      "value": "[0-9a-f]+"
-    },
-    "literal_hex_number": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "#"
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "PATTERN",
-              "value": "[0-9a-f]+"
-            },
-            "named": true,
-            "value": "hex_number"
-          }
-        }
-      ]
-    },
-    "label_data": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "absolute_padding"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "scope"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "relative_padding"
-        }
-      ]
-    },
-    "label_sublabel_data": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "absolute_padding"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "scope"
-        },
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "sublabel_data"
-          }
-        }
-      ]
-    },
-    "sublabel_data": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "sublabel"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "relative_padding"
-        }
-      ]
-    },
-    "sublabel": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "STRING",
-                "value": "/"
-              }
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "ALIAS",
-                "content": {
-                  "type": "PREC",
-                  "value": -1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[^\\s\\/]+"
-                  }
-                },
-                "named": true,
-                "value": "identifier"
-              }
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "&"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "ALIAS",
-                "content": {
-                  "type": "PREC",
-                  "value": -1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[^\\s\\/]+"
-                  }
-                },
-                "named": true,
-                "value": "identifier"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "relative_padding": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "$"
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "PATTERN",
-              "value": "[0-9a-f]+"
-            },
-            "named": true,
-            "value": "hex_number"
-          }
-        }
-      ]
-    },
-    "data": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "scope"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "raw_data"
-            },
-            {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "sublabel"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "raw_data"
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "raw_data": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "PREC",
-        "value": -1,
-        "content": {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "ascii"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "hex_number"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "relative_padding"
-            }
-          ]
-        }
-      }
-    },
-    "macro": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "%"
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "PREC",
-              "value": -1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[^\\s\\/]+"
-              }
-            },
-            "named": true,
-            "value": "identifier"
-          }
-        },
-        {
-          "type": "STRING",
-          "value": "{"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "statement"
-          }
-        },
-        {
-          "type": "STRING",
-          "value": "}"
-        }
-      ]
-    },
-    "statement": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "opcode"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "hex_number"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "literal_hex_number"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "sublabel_data"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "address"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "ascii"
-        }
-      ]
+      "value": "@[^\\s]+"
     },
     "opcode": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "base_opcode"
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "opcode_mode"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "immediate_opcode"
-        }
-      ]
-    },
-    "base_opcode": {
       "type": "CHOICE",
       "members": [
         {
@@ -441,7 +95,63 @@
         },
         {
           "type": "STRING",
+          "value": "INC2"
+        },
+        {
+          "type": "STRING",
+          "value": "INCk"
+        },
+        {
+          "type": "STRING",
+          "value": "INC2k"
+        },
+        {
+          "type": "STRING",
+          "value": "INCr"
+        },
+        {
+          "type": "STRING",
+          "value": "INC2r"
+        },
+        {
+          "type": "STRING",
+          "value": "INCkr"
+        },
+        {
+          "type": "STRING",
+          "value": "INC2kr"
+        },
+        {
+          "type": "STRING",
           "value": "POP"
+        },
+        {
+          "type": "STRING",
+          "value": "POP2"
+        },
+        {
+          "type": "STRING",
+          "value": "POPk"
+        },
+        {
+          "type": "STRING",
+          "value": "POP2k"
+        },
+        {
+          "type": "STRING",
+          "value": "POPr"
+        },
+        {
+          "type": "STRING",
+          "value": "POP2r"
+        },
+        {
+          "type": "STRING",
+          "value": "POPkr"
+        },
+        {
+          "type": "STRING",
+          "value": "POP2kr"
         },
         {
           "type": "STRING",
@@ -449,7 +159,63 @@
         },
         {
           "type": "STRING",
+          "value": "NIP2"
+        },
+        {
+          "type": "STRING",
+          "value": "NIPk"
+        },
+        {
+          "type": "STRING",
+          "value": "NIP2k"
+        },
+        {
+          "type": "STRING",
+          "value": "NIPr"
+        },
+        {
+          "type": "STRING",
+          "value": "NIP2r"
+        },
+        {
+          "type": "STRING",
+          "value": "NIPkr"
+        },
+        {
+          "type": "STRING",
+          "value": "NIP2kr"
+        },
+        {
+          "type": "STRING",
           "value": "SWP"
+        },
+        {
+          "type": "STRING",
+          "value": "SWP2"
+        },
+        {
+          "type": "STRING",
+          "value": "SWPk"
+        },
+        {
+          "type": "STRING",
+          "value": "SWP2k"
+        },
+        {
+          "type": "STRING",
+          "value": "SWPr"
+        },
+        {
+          "type": "STRING",
+          "value": "SWP2r"
+        },
+        {
+          "type": "STRING",
+          "value": "SWPkr"
+        },
+        {
+          "type": "STRING",
+          "value": "SWP2kr"
         },
         {
           "type": "STRING",
@@ -457,7 +223,63 @@
         },
         {
           "type": "STRING",
+          "value": "ROT2"
+        },
+        {
+          "type": "STRING",
+          "value": "ROTk"
+        },
+        {
+          "type": "STRING",
+          "value": "ROT2k"
+        },
+        {
+          "type": "STRING",
+          "value": "ROTr"
+        },
+        {
+          "type": "STRING",
+          "value": "ROT2r"
+        },
+        {
+          "type": "STRING",
+          "value": "ROTkr"
+        },
+        {
+          "type": "STRING",
+          "value": "ROT2kr"
+        },
+        {
+          "type": "STRING",
           "value": "DUP"
+        },
+        {
+          "type": "STRING",
+          "value": "DUP2"
+        },
+        {
+          "type": "STRING",
+          "value": "DUPk"
+        },
+        {
+          "type": "STRING",
+          "value": "DUP2k"
+        },
+        {
+          "type": "STRING",
+          "value": "DUPr"
+        },
+        {
+          "type": "STRING",
+          "value": "DUP2r"
+        },
+        {
+          "type": "STRING",
+          "value": "DUPkr"
+        },
+        {
+          "type": "STRING",
+          "value": "DUP2kr"
         },
         {
           "type": "STRING",
@@ -465,7 +287,63 @@
         },
         {
           "type": "STRING",
+          "value": "OVR2"
+        },
+        {
+          "type": "STRING",
+          "value": "OVRk"
+        },
+        {
+          "type": "STRING",
+          "value": "OVR2k"
+        },
+        {
+          "type": "STRING",
+          "value": "OVRr"
+        },
+        {
+          "type": "STRING",
+          "value": "OVR2r"
+        },
+        {
+          "type": "STRING",
+          "value": "OVRkr"
+        },
+        {
+          "type": "STRING",
+          "value": "OVR2kr"
+        },
+        {
+          "type": "STRING",
           "value": "EQU"
+        },
+        {
+          "type": "STRING",
+          "value": "EQU2"
+        },
+        {
+          "type": "STRING",
+          "value": "EQUk"
+        },
+        {
+          "type": "STRING",
+          "value": "EQU2k"
+        },
+        {
+          "type": "STRING",
+          "value": "EQUr"
+        },
+        {
+          "type": "STRING",
+          "value": "EQU2r"
+        },
+        {
+          "type": "STRING",
+          "value": "EQUkr"
+        },
+        {
+          "type": "STRING",
+          "value": "EQU2kr"
         },
         {
           "type": "STRING",
@@ -473,7 +351,63 @@
         },
         {
           "type": "STRING",
+          "value": "NEQ2"
+        },
+        {
+          "type": "STRING",
+          "value": "NEQk"
+        },
+        {
+          "type": "STRING",
+          "value": "NEQ2k"
+        },
+        {
+          "type": "STRING",
+          "value": "NEQr"
+        },
+        {
+          "type": "STRING",
+          "value": "NEQ2r"
+        },
+        {
+          "type": "STRING",
+          "value": "NEQkr"
+        },
+        {
+          "type": "STRING",
+          "value": "NEQ2kr"
+        },
+        {
+          "type": "STRING",
           "value": "GTH"
+        },
+        {
+          "type": "STRING",
+          "value": "GTH2"
+        },
+        {
+          "type": "STRING",
+          "value": "GTHk"
+        },
+        {
+          "type": "STRING",
+          "value": "GTH2k"
+        },
+        {
+          "type": "STRING",
+          "value": "GTHr"
+        },
+        {
+          "type": "STRING",
+          "value": "GTH2r"
+        },
+        {
+          "type": "STRING",
+          "value": "GTHkr"
+        },
+        {
+          "type": "STRING",
+          "value": "GTH2kr"
         },
         {
           "type": "STRING",
@@ -481,7 +415,63 @@
         },
         {
           "type": "STRING",
+          "value": "LTH2"
+        },
+        {
+          "type": "STRING",
+          "value": "LTHk"
+        },
+        {
+          "type": "STRING",
+          "value": "LTH2k"
+        },
+        {
+          "type": "STRING",
+          "value": "LTHr"
+        },
+        {
+          "type": "STRING",
+          "value": "LTH2r"
+        },
+        {
+          "type": "STRING",
+          "value": "LTHkr"
+        },
+        {
+          "type": "STRING",
+          "value": "LTH2kr"
+        },
+        {
+          "type": "STRING",
           "value": "JMP"
+        },
+        {
+          "type": "STRING",
+          "value": "JMP2"
+        },
+        {
+          "type": "STRING",
+          "value": "JMPk"
+        },
+        {
+          "type": "STRING",
+          "value": "JMP2k"
+        },
+        {
+          "type": "STRING",
+          "value": "JMPr"
+        },
+        {
+          "type": "STRING",
+          "value": "JMP2r"
+        },
+        {
+          "type": "STRING",
+          "value": "JMPkr"
+        },
+        {
+          "type": "STRING",
+          "value": "JMP2kr"
         },
         {
           "type": "STRING",
@@ -489,7 +479,63 @@
         },
         {
           "type": "STRING",
+          "value": "JCN2"
+        },
+        {
+          "type": "STRING",
+          "value": "JCNk"
+        },
+        {
+          "type": "STRING",
+          "value": "JCN2k"
+        },
+        {
+          "type": "STRING",
+          "value": "JCNr"
+        },
+        {
+          "type": "STRING",
+          "value": "JCN2r"
+        },
+        {
+          "type": "STRING",
+          "value": "JCNkr"
+        },
+        {
+          "type": "STRING",
+          "value": "JCN2kr"
+        },
+        {
+          "type": "STRING",
           "value": "JSR"
+        },
+        {
+          "type": "STRING",
+          "value": "JSR2"
+        },
+        {
+          "type": "STRING",
+          "value": "JSRk"
+        },
+        {
+          "type": "STRING",
+          "value": "JSR2k"
+        },
+        {
+          "type": "STRING",
+          "value": "JSRr"
+        },
+        {
+          "type": "STRING",
+          "value": "JSR2r"
+        },
+        {
+          "type": "STRING",
+          "value": "JSRkr"
+        },
+        {
+          "type": "STRING",
+          "value": "JSR2kr"
         },
         {
           "type": "STRING",
@@ -497,7 +543,63 @@
         },
         {
           "type": "STRING",
+          "value": "STH2"
+        },
+        {
+          "type": "STRING",
+          "value": "STHk"
+        },
+        {
+          "type": "STRING",
+          "value": "STH2k"
+        },
+        {
+          "type": "STRING",
+          "value": "STHr"
+        },
+        {
+          "type": "STRING",
+          "value": "STH2r"
+        },
+        {
+          "type": "STRING",
+          "value": "STHkr"
+        },
+        {
+          "type": "STRING",
+          "value": "STH2kr"
+        },
+        {
+          "type": "STRING",
           "value": "LDZ"
+        },
+        {
+          "type": "STRING",
+          "value": "LDZ2"
+        },
+        {
+          "type": "STRING",
+          "value": "LDZk"
+        },
+        {
+          "type": "STRING",
+          "value": "LDZ2k"
+        },
+        {
+          "type": "STRING",
+          "value": "LDZr"
+        },
+        {
+          "type": "STRING",
+          "value": "LDZ2r"
+        },
+        {
+          "type": "STRING",
+          "value": "LDZkr"
+        },
+        {
+          "type": "STRING",
+          "value": "LDZ2kr"
         },
         {
           "type": "STRING",
@@ -505,7 +607,63 @@
         },
         {
           "type": "STRING",
+          "value": "STZ2"
+        },
+        {
+          "type": "STRING",
+          "value": "STZk"
+        },
+        {
+          "type": "STRING",
+          "value": "STZ2k"
+        },
+        {
+          "type": "STRING",
+          "value": "STZr"
+        },
+        {
+          "type": "STRING",
+          "value": "STZ2r"
+        },
+        {
+          "type": "STRING",
+          "value": "STZkr"
+        },
+        {
+          "type": "STRING",
+          "value": "STZ2kr"
+        },
+        {
+          "type": "STRING",
           "value": "LDR"
+        },
+        {
+          "type": "STRING",
+          "value": "LDR2"
+        },
+        {
+          "type": "STRING",
+          "value": "LDRk"
+        },
+        {
+          "type": "STRING",
+          "value": "LDR2k"
+        },
+        {
+          "type": "STRING",
+          "value": "LDRr"
+        },
+        {
+          "type": "STRING",
+          "value": "LDR2r"
+        },
+        {
+          "type": "STRING",
+          "value": "LDRkr"
+        },
+        {
+          "type": "STRING",
+          "value": "LDR2kr"
         },
         {
           "type": "STRING",
@@ -513,7 +671,63 @@
         },
         {
           "type": "STRING",
+          "value": "STR2"
+        },
+        {
+          "type": "STRING",
+          "value": "STRk"
+        },
+        {
+          "type": "STRING",
+          "value": "STR2k"
+        },
+        {
+          "type": "STRING",
+          "value": "STRr"
+        },
+        {
+          "type": "STRING",
+          "value": "STR2r"
+        },
+        {
+          "type": "STRING",
+          "value": "STRkr"
+        },
+        {
+          "type": "STRING",
+          "value": "STR2kr"
+        },
+        {
+          "type": "STRING",
           "value": "LDA"
+        },
+        {
+          "type": "STRING",
+          "value": "LDA2"
+        },
+        {
+          "type": "STRING",
+          "value": "LDAk"
+        },
+        {
+          "type": "STRING",
+          "value": "LDA2k"
+        },
+        {
+          "type": "STRING",
+          "value": "LDAr"
+        },
+        {
+          "type": "STRING",
+          "value": "LDA2r"
+        },
+        {
+          "type": "STRING",
+          "value": "LDAkr"
+        },
+        {
+          "type": "STRING",
+          "value": "LDA2kr"
         },
         {
           "type": "STRING",
@@ -521,7 +735,63 @@
         },
         {
           "type": "STRING",
+          "value": "STA2"
+        },
+        {
+          "type": "STRING",
+          "value": "STAk"
+        },
+        {
+          "type": "STRING",
+          "value": "STA2k"
+        },
+        {
+          "type": "STRING",
+          "value": "STAr"
+        },
+        {
+          "type": "STRING",
+          "value": "STA2r"
+        },
+        {
+          "type": "STRING",
+          "value": "STAkr"
+        },
+        {
+          "type": "STRING",
+          "value": "STA2kr"
+        },
+        {
+          "type": "STRING",
           "value": "DEI"
+        },
+        {
+          "type": "STRING",
+          "value": "DEI2"
+        },
+        {
+          "type": "STRING",
+          "value": "DEIk"
+        },
+        {
+          "type": "STRING",
+          "value": "DEI2k"
+        },
+        {
+          "type": "STRING",
+          "value": "DEIr"
+        },
+        {
+          "type": "STRING",
+          "value": "DEI2r"
+        },
+        {
+          "type": "STRING",
+          "value": "DEIkr"
+        },
+        {
+          "type": "STRING",
+          "value": "DEI2kr"
         },
         {
           "type": "STRING",
@@ -529,7 +799,63 @@
         },
         {
           "type": "STRING",
+          "value": "DEO2"
+        },
+        {
+          "type": "STRING",
+          "value": "DEOk"
+        },
+        {
+          "type": "STRING",
+          "value": "DEO2k"
+        },
+        {
+          "type": "STRING",
+          "value": "DEOr"
+        },
+        {
+          "type": "STRING",
+          "value": "DEO2r"
+        },
+        {
+          "type": "STRING",
+          "value": "DEOkr"
+        },
+        {
+          "type": "STRING",
+          "value": "DEO2kr"
+        },
+        {
+          "type": "STRING",
           "value": "ADD"
+        },
+        {
+          "type": "STRING",
+          "value": "ADD2"
+        },
+        {
+          "type": "STRING",
+          "value": "ADDk"
+        },
+        {
+          "type": "STRING",
+          "value": "ADD2k"
+        },
+        {
+          "type": "STRING",
+          "value": "ADDr"
+        },
+        {
+          "type": "STRING",
+          "value": "ADD2r"
+        },
+        {
+          "type": "STRING",
+          "value": "ADDkr"
+        },
+        {
+          "type": "STRING",
+          "value": "ADD2kr"
         },
         {
           "type": "STRING",
@@ -537,7 +863,63 @@
         },
         {
           "type": "STRING",
+          "value": "SUB2"
+        },
+        {
+          "type": "STRING",
+          "value": "SUBk"
+        },
+        {
+          "type": "STRING",
+          "value": "SUB2k"
+        },
+        {
+          "type": "STRING",
+          "value": "SUBr"
+        },
+        {
+          "type": "STRING",
+          "value": "SUB2r"
+        },
+        {
+          "type": "STRING",
+          "value": "SUBkr"
+        },
+        {
+          "type": "STRING",
+          "value": "SUB2kr"
+        },
+        {
+          "type": "STRING",
           "value": "MUL"
+        },
+        {
+          "type": "STRING",
+          "value": "MUL2"
+        },
+        {
+          "type": "STRING",
+          "value": "MULk"
+        },
+        {
+          "type": "STRING",
+          "value": "MUL2k"
+        },
+        {
+          "type": "STRING",
+          "value": "MULr"
+        },
+        {
+          "type": "STRING",
+          "value": "MUL2r"
+        },
+        {
+          "type": "STRING",
+          "value": "MULkr"
+        },
+        {
+          "type": "STRING",
+          "value": "MUL2kr"
         },
         {
           "type": "STRING",
@@ -545,7 +927,63 @@
         },
         {
           "type": "STRING",
+          "value": "DIV2"
+        },
+        {
+          "type": "STRING",
+          "value": "DIVk"
+        },
+        {
+          "type": "STRING",
+          "value": "DIV2k"
+        },
+        {
+          "type": "STRING",
+          "value": "DIVr"
+        },
+        {
+          "type": "STRING",
+          "value": "DIV2r"
+        },
+        {
+          "type": "STRING",
+          "value": "DIVkr"
+        },
+        {
+          "type": "STRING",
+          "value": "DIV2kr"
+        },
+        {
+          "type": "STRING",
           "value": "AND"
+        },
+        {
+          "type": "STRING",
+          "value": "AND2"
+        },
+        {
+          "type": "STRING",
+          "value": "ANDk"
+        },
+        {
+          "type": "STRING",
+          "value": "AND2k"
+        },
+        {
+          "type": "STRING",
+          "value": "ANDr"
+        },
+        {
+          "type": "STRING",
+          "value": "AND2r"
+        },
+        {
+          "type": "STRING",
+          "value": "ANDkr"
+        },
+        {
+          "type": "STRING",
+          "value": "AND2kr"
         },
         {
           "type": "STRING",
@@ -553,21 +991,112 @@
         },
         {
           "type": "STRING",
+          "value": "ORA2"
+        },
+        {
+          "type": "STRING",
+          "value": "ORAk"
+        },
+        {
+          "type": "STRING",
+          "value": "ORA2k"
+        },
+        {
+          "type": "STRING",
+          "value": "ORAr"
+        },
+        {
+          "type": "STRING",
+          "value": "ORA2r"
+        },
+        {
+          "type": "STRING",
+          "value": "ORAkr"
+        },
+        {
+          "type": "STRING",
+          "value": "ORA2kr"
+        },
+        {
+          "type": "STRING",
           "value": "EOR"
         },
         {
           "type": "STRING",
+          "value": "EOR2"
+        },
+        {
+          "type": "STRING",
+          "value": "EORk"
+        },
+        {
+          "type": "STRING",
+          "value": "EOR2k"
+        },
+        {
+          "type": "STRING",
+          "value": "EORr"
+        },
+        {
+          "type": "STRING",
+          "value": "EOR2r"
+        },
+        {
+          "type": "STRING",
+          "value": "EORkr"
+        },
+        {
+          "type": "STRING",
+          "value": "EOR2kr"
+        },
+        {
+          "type": "STRING",
           "value": "SFT"
-        }
-      ]
-    },
-    "opcode_mode": {
-      "type": "PATTERN",
-      "value": "2?k?r?"
-    },
-    "immediate_opcode": {
-      "type": "CHOICE",
-      "members": [
+        },
+        {
+          "type": "STRING",
+          "value": "SFT2"
+        },
+        {
+          "type": "STRING",
+          "value": "SFTk"
+        },
+        {
+          "type": "STRING",
+          "value": "SFT2k"
+        },
+        {
+          "type": "STRING",
+          "value": "SFTr"
+        },
+        {
+          "type": "STRING",
+          "value": "SFT2r"
+        },
+        {
+          "type": "STRING",
+          "value": "SFTkr"
+        },
+        {
+          "type": "STRING",
+          "value": "SFT2kr"
+        },
+        {
+          "type": "STRING",
+          "value": "LIT"
+        },
+        {
+          "type": "STRING",
+          "value": "LIT2"
+        },
+        {
+          "type": "STRING",
+          "value": "LITr"
+        },
+        {
+          "type": "STRING",
+          "value": "LIT2r"
+        },
         {
           "type": "STRING",
           "value": "JCI"
@@ -579,181 +1108,50 @@
         {
           "type": "STRING",
           "value": "JSI"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "literal_opcode"
         }
       ]
     },
-    "literal_opcode": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "LIT"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "2"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "r"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
-    },
-    "address_prefix": {
+    "hex_number": {
       "type": "PATTERN",
-      "value": "[,\\.;!_\\-=\\?]"
+      "value": "[0-9a-f]+"
     },
-    "address": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "address_prefix"
-        },
-        {
-          "type": "PREC_RIGHT",
-          "value": 0,
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "IMMEDIATE_TOKEN",
-                "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "PREC",
-                    "value": -1,
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "[^\\s\\/]+"
-                    }
-                  },
-                  "named": true,
-                  "value": "identifier"
-                }
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "IMMEDIATE_TOKEN",
-                    "content": {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "PREC",
-                        "value": -1,
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "[^\\s\\/]+"
-                        }
-                      },
-                      "named": true,
-                      "value": "identifier"
-                    }
-                  },
-                  {
-                    "type": "IMMEDIATE_TOKEN",
-                    "content": {
-                      "type": "STRING",
-                      "value": "/"
-                    }
-                  },
-                  {
-                    "type": "IMMEDIATE_TOKEN",
-                    "content": {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "PREC",
-                        "value": -1,
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "[^\\s\\/]+"
-                        }
-                      },
-                      "named": true,
-                      "value": "identifier"
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
+    "literal_hex_number": {
+      "type": "PATTERN",
+      "value": "#[0-9a-f]+"
     },
     "ascii": {
       "type": "PATTERN",
-      "value": "\"[!-~]+"
+      "value": "\"[^\\s]+"
     },
-    "routine": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "scope"
-        },
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "PREC",
-            "value": 1,
-            "content": {
-              "type": "SYMBOL",
-              "name": "statement"
-            }
-          }
-        }
-      ]
+    "address": {
+      "type": "PATTERN",
+      "value": "[,\\.;!_\\-=\\?][^\\s]+"
     },
-    "identifier": {
-      "type": "PREC",
-      "value": -1,
-      "content": {
-        "type": "PATTERN",
-        "value": "[^\\s\\/]+"
-      }
+    "detached_sublabel": {
+      "type": "PATTERN",
+      "value": "&[^\\s]+"
+    },
+    "relative_padding": {
+      "type": "PATTERN",
+      "value": "\\$[0-9]+"
+    },
+    "subroutine_or_macro": {
+      "type": "PATTERN",
+      "value": "[^\\s]+"
     }
   },
   "extras": [
     {
       "type": "STRING",
-      "value": "["
+      "value": "\t"
     },
     {
       "type": "STRING",
-      "value": "]"
+      "value": "\n"
     },
     {
       "type": "STRING",
-      "value": "("
-    },
-    {
-      "type": "STRING",
-      "value": ")"
-    },
-    {
-      "type": "PATTERN",
-      "value": "[\\t\\n ]"
+      "value": " "
     }
   ],
   "conflicts": [],
