@@ -7,6 +7,9 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+// TODO: Add absolute padding
+// TODO: Add macro definitions
+
 module.exports = grammar({
   name: "uxntal",
 
@@ -15,8 +18,7 @@ module.exports = grammar({
       choice(
         $.scope,
         $.opcode,
-        $.hex_number,
-        $.literal_hex_number,
+        $.number,
         $.ascii,
         $.address,
         $.detached_sublabel,
@@ -79,6 +81,8 @@ module.exports = grammar({
     hex_number: _ => /[0-9a-f]+/,
 
     literal_hex_number: $ => /#[0-9a-f]+/,
+
+    number: $ => choice($.literal_hex_number, $.hex_number),
 
     ascii: _ => /"[^\s]+/,
 

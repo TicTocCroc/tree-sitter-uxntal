@@ -17,11 +17,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "hex_number"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "literal_hex_number"
+            "name": "number"
           },
           {
             "type": "SYMBOL",
@@ -1118,6 +1114,19 @@
     "literal_hex_number": {
       "type": "PATTERN",
       "value": "#[0-9a-f]+"
+    },
+    "number": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "literal_hex_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hex_number"
+        }
+      ]
     },
     "ascii": {
       "type": "PATTERN",
