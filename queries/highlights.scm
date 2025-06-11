@@ -1,5 +1,3 @@
-; highlights.scm
-
 (comment) @comment
 (scope) @function
 (opcode) @keyword
