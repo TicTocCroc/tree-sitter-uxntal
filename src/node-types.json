@@ -45,7 +45,7 @@
           "named": true
         },
         {
-          "type": "bracket",
+          "type": "close_bracket",
           "named": true
         },
         {
@@ -74,6 +74,10 @@
         },
         {
           "type": "opcode",
+          "named": true
+        },
+        {
+          "type": "open_bracket",
           "named": true
         },
         {
@@ -1128,7 +1132,7 @@
     "named": true
   },
   {
-    "type": "bracket",
+    "type": "close_bracket",
     "named": true
   },
   {
@@ -1157,6 +1161,10 @@
   },
   {
     "type": "macro_definition",
+    "named": true
+  },
+  {
+    "type": "open_bracket",
     "named": true
   },
   {

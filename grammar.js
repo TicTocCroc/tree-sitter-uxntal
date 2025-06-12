@@ -22,7 +22,8 @@ module.exports = grammar({
         $.subroutine_or_macro,
         $.include,
         $.comment,
-        $.bracket,
+        $.open_bracket,
+        $.close_bracket,
         $.closure,
         $.absolute_padding,
         $.relative_padding,
@@ -34,7 +35,9 @@ module.exports = grammar({
 
     comment: _ => /\(.*\)/,
 
-    bracket: _ => /[\[\]]/,
+    open_bracket: _ => '[',
+
+    close_bracket: _ => ']',
 
     closure: _ => /\?\{|\}/,
 

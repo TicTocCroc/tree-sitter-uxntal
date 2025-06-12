@@ -45,7 +45,11 @@
           },
           {
             "type": "SYMBOL",
-            "name": "bracket"
+            "name": "open_bracket"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "close_bracket"
           },
           {
             "type": "SYMBOL",
@@ -74,9 +78,13 @@
       "type": "PATTERN",
       "value": "\\(.*\\)"
     },
-    "bracket": {
-      "type": "PATTERN",
-      "value": "[\\[\\]]"
+    "open_bracket": {
+      "type": "STRING",
+      "value": "["
+    },
+    "close_bracket": {
+      "type": "STRING",
+      "value": "]"
     },
     "closure": {
       "type": "PATTERN",
