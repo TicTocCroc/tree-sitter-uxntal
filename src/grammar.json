@@ -1204,7 +1204,7 @@
     },
     "subroutine_or_macro": {
       "type": "PATTERN",
-      "value": "[^@\\s]+"
+      "value": "[^@&\\s]+"
     },
     "identifier": {
       "type": "PATTERN",
