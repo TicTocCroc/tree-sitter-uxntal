@@ -105,11 +105,6 @@
     }
   },
   {
-    "type": "subroutine_or_macro",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "@",
     "named": false
   },
@@ -1191,6 +1186,10 @@
   },
   {
     "type": "relative_padding",
+    "named": true
+  },
+  {
+    "type": "subroutine_or_macro",
     "named": true
   }
 ]

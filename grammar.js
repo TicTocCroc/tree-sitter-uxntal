@@ -101,7 +101,7 @@ module.exports = grammar({
 
     macro_definition: _ => /%[^\s]+/,
 
-    subroutine_or_macro: _ => /[^\s]+/,
+    subroutine_or_macro: _ => /[^@\s]+/,
   },
 
   extras: _ => ['\t', '\n', ' ']
