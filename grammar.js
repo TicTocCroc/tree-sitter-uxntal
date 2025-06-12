@@ -87,7 +87,7 @@ module.exports = grammar({
 
     address_prefix: _ => /[,\.;!_\-=\?]/,
 
-    address: $ => prec(1, seq($.address_prefix, token.immediate(/[^\s]+/))),
+    address: $ => seq($.address_prefix, token.immediate(/[^\s]+/)),
 
     detached_sublabel: _ => /&[^\s]+/,
 
@@ -97,7 +97,7 @@ module.exports = grammar({
 
     macro_definition: _ => /%[^\s]+/,
 
-    subroutine_or_macro: _ => /[^\s]+/,
+    subroutine_or_macro: _ => /[^,\.;!_\-=\?]+/,
   },
 
   extras: _ => ['\t', '\n', ' ']
