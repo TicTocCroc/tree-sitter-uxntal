@@ -85,7 +85,9 @@ module.exports = grammar({
 
     ascii: _ => /"[^\s]+/,
 
-    address: _ => /[,\.;!_\-=\?][^\s]+/,
+    address_prefix: _ => /[,\.;!_\-=\?]/,
+
+    address: $ => seq($.address_prefix, token.immediate(/[^\s]+/)),
 
     detached_sublabel: _ => /&[^\s]+/,
 

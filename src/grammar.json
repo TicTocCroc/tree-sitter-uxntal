@@ -1140,9 +1140,25 @@
       "type": "PATTERN",
       "value": "\"[^\\s]+"
     },
-    "address": {
+    "address_prefix": {
       "type": "PATTERN",
-      "value": "[,\\.;!_\\-=\\?][^\\s]+"
+      "value": "[,\\.;!_\\-=\\?]"
+    },
+    "address": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "address_prefix"
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "[^\\s]+"
+          }
+        }
+      ]
     },
     "detached_sublabel": {
       "type": "PATTERN",

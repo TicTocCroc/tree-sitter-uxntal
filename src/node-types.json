@@ -1,5 +1,20 @@
 [
   {
+    "type": "address",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "address_prefix",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "number",
     "named": true,
     "fields": {},
@@ -1120,7 +1135,7 @@
     "named": true
   },
   {
-    "type": "address",
+    "type": "address_prefix",
     "named": true
   },
   {
