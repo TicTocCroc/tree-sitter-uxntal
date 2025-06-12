@@ -44,7 +44,7 @@ module.exports = grammar({
 
     close_closure: _ => '}',
 
-    scope: _ => seq('@', field('name', /[^\s]+/)),
+    scope: $ => seq('@', field('name', $.identifier)),
 
     opcode: _ => choice(
       'BRK',
@@ -102,6 +102,8 @@ module.exports = grammar({
     macro_definition: _ => /%[^\s]+/,
 
     subroutine_or_macro: _ => /[^@\s]+/,
+
+    identifier: _ => /[^\s]+/,
   },
 
   extras: _ => ['\t', '\n', ' ']

@@ -26,7 +26,18 @@
   {
     "type": "scope",
     "named": true,
-    "fields": {}
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "source_file",
@@ -1162,6 +1173,10 @@
   },
   {
     "type": "hex_number",
+    "named": true
+  },
+  {
+    "type": "identifier",
     "named": true
   },
   {

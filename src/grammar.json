@@ -109,8 +109,8 @@
           "type": "FIELD",
           "name": "name",
           "content": {
-            "type": "PATTERN",
-            "value": "[^\\s]+"
+            "type": "SYMBOL",
+            "name": "identifier"
           }
         }
       ]
@@ -1192,6 +1192,10 @@
     "subroutine_or_macro": {
       "type": "PATTERN",
       "value": "[^@\\s]+"
+    },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[^\\s]+"
     }
   },
   "extras": [
