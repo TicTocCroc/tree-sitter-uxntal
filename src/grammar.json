@@ -1140,25 +1140,9 @@
       "type": "PATTERN",
       "value": "\"[^\\s]+"
     },
-    "address_prefix": {
-      "type": "PATTERN",
-      "value": "[,\\.;!_\\-=\\?]"
-    },
     "address": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "address_prefix"
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[^\\s]+"
-          }
-        }
-      ]
+      "type": "PATTERN",
+      "value": "[,\\.;!_\\-=\\?][^\\s]+"
     },
     "detached_sublabel": {
       "type": "PATTERN",
@@ -1178,7 +1162,7 @@
     },
     "subroutine_or_macro": {
       "type": "PATTERN",
-      "value": "[^,\\.;!_\\-=\\?]+"
+      "value": "[^\\s]+"
     }
   },
   "extras": [

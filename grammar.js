@@ -85,9 +85,7 @@ module.exports = grammar({
 
     ascii: _ => /"[^\s]+/,
 
-    address_prefix: _ => /[,\.;!_\-=\?]/,
-
-    address: $ => seq($.address_prefix, token.immediate(/[^\s]+/)),
+    address: _ => /[,\.;!_\-=\?][^\s]+/,
 
     detached_sublabel: _ => /&[^\s]+/,
 
@@ -97,7 +95,7 @@ module.exports = grammar({
 
     macro_definition: _ => /%[^\s]+/,
 
-    subroutine_or_macro: _ => /[^,\.;!_\-=\?]+/,
+    subroutine_or_macro: _ => /[^\s]+/,
   },
 
   extras: _ => ['\t', '\n', ' ']
