@@ -24,6 +24,11 @@
     "fields": {}
   },
   {
+    "type": "scope",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "source_file",
     "named": true,
     "root": true,
@@ -98,6 +103,15 @@
         }
       ]
     }
+  },
+  {
+    "type": "subroutine_or_macro",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "@",
+    "named": false
   },
   {
     "type": "ADD",
@@ -1177,14 +1191,6 @@
   },
   {
     "type": "relative_padding",
-    "named": true
-  },
-  {
-    "type": "scope",
-    "named": true
-  },
-  {
-    "type": "subroutine_or_macro",
     "named": true
   }
 ]
