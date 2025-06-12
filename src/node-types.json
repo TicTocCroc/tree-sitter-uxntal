@@ -33,6 +33,10 @@
       "required": false,
       "types": [
         {
+          "type": "absolute_padding",
+          "named": true
+        },
+        {
           "type": "address",
           "named": true
         },
@@ -58,6 +62,10 @@
         },
         {
           "type": "include",
+          "named": true
+        },
+        {
+          "type": "macro_definition",
           "named": true
         },
         {
@@ -1108,6 +1116,10 @@
     "named": false
   },
   {
+    "type": "absolute_padding",
+    "named": true
+  },
+  {
     "type": "address",
     "named": true
   },
@@ -1141,6 +1153,10 @@
   },
   {
     "type": "literal_hex_number",
+    "named": true
+  },
+  {
+    "type": "macro_definition",
     "named": true
   },
   {
