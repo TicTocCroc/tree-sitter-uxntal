@@ -93,7 +93,7 @@ module.exports = grammar({
 
     address: _ => /[,\.;!_\-=\?][^\s]+/,
 
-    detached_sublabel: _ => /&[^\s]+/,
+    detached_sublabel: $ => seq('&', field('name', $.identifier)),
 
     absolute_padding: _ => /\|[0-9a-f]+/,
 

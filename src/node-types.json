@@ -1,5 +1,21 @@
 [
   {
+    "type": "detached_sublabel",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "number",
     "named": true,
     "fields": {},
@@ -114,6 +130,10 @@
         }
       ]
     }
+  },
+  {
+    "type": "&",
+    "named": false
   },
   {
     "type": "@",
@@ -1165,10 +1185,6 @@
   },
   {
     "type": "comment",
-    "named": true
-  },
-  {
-    "type": "detached_sublabel",
     "named": true
   },
   {

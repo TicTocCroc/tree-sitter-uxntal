@@ -1174,8 +1174,21 @@
       "value": "[,\\.;!_\\-=\\?][^\\s]+"
     },
     "detached_sublabel": {
-      "type": "PATTERN",
-      "value": "&[^\\s]+"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "&"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        }
+      ]
     },
     "absolute_padding": {
       "type": "PATTERN",
