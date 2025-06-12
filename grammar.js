@@ -24,7 +24,8 @@ module.exports = grammar({
         $.comment,
         $.open_bracket,
         $.close_bracket,
-        $.closure,
+        $.open_closure,
+        $.close_closure,
         $.absolute_padding,
         $.relative_padding,
         $.macro_definition
@@ -39,7 +40,9 @@ module.exports = grammar({
 
     close_bracket: _ => ']',
 
-    closure: _ => /\?\{|\}/,
+    open_closure: _ => '?{',
+
+    close_closure: _ => '}',
 
     scope: _ => /@[^\s]+/,
 
