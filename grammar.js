@@ -7,9 +7,6 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-// TODO: Add absolute padding
-// TODO: Add macro definitions
-
 module.exports = grammar({
   name: "uxntal",
 
@@ -27,7 +24,9 @@ module.exports = grammar({
         $.comment,
         $.bracket,
         $.closure,
-        $.relative_padding
+        $.absolute_padding,
+        $.relative_padding,
+        $.macro_definition
       )
     ),
 
@@ -90,7 +89,11 @@ module.exports = grammar({
 
     detached_sublabel: _ => /&[^\s]+/,
 
-    relative_padding: _ => /\$[0-9]+/,
+    absolute_padding: _ => /\|[0-9a-f]+/,
+
+    relative_padding: _ => /\$[0-9a-f]+/,
+
+    macro_definition: _ => /%[^\s]+/,
 
     subroutine_or_macro: _ => /[^\s]+/,
   },
