@@ -34,7 +34,7 @@ module.exports = grammar({
 
     include: _ => /~[^\s]+/,
 
-    comment: _ => /\(.*\)/,
+    comment: _ => token(/\([^)]*\)/),
 
     open_bracket: _ => '[',
 
@@ -106,5 +106,8 @@ module.exports = grammar({
     identifier: _ => /[^\s]+/,
   },
 
-  extras: _ => ['\t', '\n', ' ']
+  extras: $ => [
+    /\s|\\\r?\n/,
+    $.comment
+  ]
 });
