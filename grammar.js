@@ -34,7 +34,7 @@ module.exports = grammar({
 
     include: _ => /~[^\s]+/,
 
-    comment: _ => token(/\([^)]*\)/),
+    comment: _ => token(/\( [^)]* \)/),
 
     open_bracket: _ => '[',
 
