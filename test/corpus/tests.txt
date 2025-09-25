@@ -8,9 +8,11 @@ Routine 1
 ---
 
 (source_file
-      (scope)
+      (scope
+        (identifier))
       (subroutine_or_macro)
-      (literal_hex_number)
+      (number
+        (literal_hex_number))
       (opcode)
       (address))
 
@@ -24,10 +26,12 @@ Routine 2
 ---
 
 (source_file
-      (scope)
+      (scope
+        (identifier))
       (comment)
       (subroutine_or_macro)
-      (literal_hex_number)
+      (number
+        (literal_hex_number))
       (opcode)
       (address))
 
@@ -55,68 +59,79 @@ Routine 3
 ---
 
 (source_file
-      (scope)
+      (scope
+        (identifier))
       (opcode)
-      (closure)
+      (open_closure)
       (opcode)
       (opcode)
-      (closure)
+      (close_closure)
       (opcode)
-      (literal_hex_number)
+      (number
+        (literal_hex_number))
       (opcode)
-      (closure)
+      (open_closure)
       (comment)
       (subroutine_or_macro)
-      (literal_hex_number)
+      (number
+        (literal_hex_number))
       (opcode)
       (address)
       (comment)
       (subroutine_or_macro)
-      (literal_hex_number)
+      (number
+        (literal_hex_number))
       (opcode)
       (address)
-      (closure)
+      (close_closure)
       (opcode)
-      (literal_hex_number)
+      (number
+        (literal_hex_number))
       (opcode)
-      (closure)
+      (open_closure)
       (comment)
       (subroutine_or_macro)
-      (literal_hex_number)
+      (number
+        (literal_hex_number))
       (opcode)
-      (closure)
+      (open_closure)
       (subroutine_or_macro)
-      (closure)
+      (close_closure)
       (comment)
       (subroutine_or_macro)
-      (literal_hex_number)
+      (number
+        (literal_hex_number))
       (opcode)
-      (closure)
+      (open_closure)
       (subroutine_or_macro)
-      (closure)
-      (bracket)
+      (close_closure)
+      (open_bracket)
       (opcode)
-      (detached_sublabel)
+      (detached_sublabel
+        (identifier))
       (relative_padding)
-      (bracket)
+      (close_bracket)
       (opcode)
       (address)
       (opcode)
-      (literal_hex_number)
+      (number
+        (literal_hex_number))
       (opcode)
       (address)
       (opcode)
       (opcode)
-      (closure)
+      (close_closure)
       (subroutine_or_macro)
-      (bracket)
+      (open_bracket)
       (opcode)
-      (hex_number)
+      (number
+        (hex_number))
       (address)
-      (bracket)
+      (close_bracket)
       (opcode)
       (opcode)
-      (detached_sublabel)
+      (detached_sublabel
+        (identifier))
       (comment)
       (opcode)
       (opcode))
@@ -141,14 +156,16 @@ Routine 4
 
 (source_file
       (include)
-      (scope)
+      (scope
+        (identifier))
       (comment)
       (address)
       (opcode)
       (opcode)
-      (literal_hex_number)
+      (number
+        (literal_hex_number))
       (opcode)
-      (closure)
+      (open_closure)
       (opcode)
       (subroutine_or_macro)
       (address)
@@ -159,7 +176,7 @@ Routine 4
       (address)
       (opcode)
       (opcode)
-      (closure)
+      (close_closure)
       (subroutine_or_macro)
       (opcode))
 
@@ -176,29 +193,39 @@ Data
 ---
 
 (source_file
-      (scope)
+      (scope
+        (identifier))
       (relative_padding)
       (comment)
       (ascii)
-      (hex_number)
+      (number
+        (hex_number))
       (comment)
       (ascii)
-      (hex_number)
+      (number
+        (hex_number))
       (ascii)
-      (hex_number)
+      (number
+        (hex_number))
       (comment)
       (ascii)
-      (hex_number)
+      (number
+        (hex_number))
       (ascii)
-      (hex_number)
+      (number
+        (hex_number))
       (ascii)
-      (hex_number)
+      (number
+        (hex_number))
       (ascii)
-      (hex_number)
+      (number
+        (hex_number))
       (comment)
       (ascii)
-      (hex_number)
+      (number
+        (hex_number))
       (ascii)
-      (hex_number)
+      (number
+        (hex_number))
       (ascii)
       (relative_padding))
