@@ -9,6 +9,10 @@
         "members": [
           {
             "type": "SYMBOL",
+            "name": "comment"
+          },
+          {
+            "type": "SYMBOL",
             "name": "scope"
           },
           {
@@ -38,10 +42,6 @@
           {
             "type": "SYMBOL",
             "name": "include"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "comment"
           },
           {
             "type": "SYMBOL",
@@ -80,7 +80,7 @@
     },
     "comment": {
       "type": "PATTERN",
-      "value": "\\(.*\\)"
+      "value": "\\( [^)]* \\)"
     },
     "open_bracket": {
       "type": "STRING",
@@ -1213,16 +1213,12 @@
   },
   "extras": [
     {
-      "type": "STRING",
-      "value": "\t"
+      "type": "PATTERN",
+      "value": "\\s|\\\\\\r?\\n"
     },
     {
-      "type": "STRING",
-      "value": "\n"
-    },
-    {
-      "type": "STRING",
-      "value": " "
+      "type": "SYMBOL",
+      "name": "comment"
     }
   ],
   "conflicts": [],

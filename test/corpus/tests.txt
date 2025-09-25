@@ -229,3 +229,17 @@ Data
         (hex_number))
       (ascii)
       (relative_padding))
+
+========
+Comments
+========
+
+( a single-line comment )
+( a multi-line
+comment )
+
+---
+(source_file
+  (comment)
+  (comment)
+)
