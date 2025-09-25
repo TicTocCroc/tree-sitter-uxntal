@@ -13,6 +13,7 @@ module.exports = grammar({
   rules: {
     source_file: $ => repeat(
       choice(
+        $.comment,
         $.scope,
         $.opcode,
         $.number,
@@ -21,7 +22,6 @@ module.exports = grammar({
         $.detached_sublabel,
         $.subroutine_or_macro,
         $.include,
-        $.comment,
         $.open_bracket,
         $.close_bracket,
         $.open_closure,
@@ -34,7 +34,7 @@ module.exports = grammar({
 
     include: _ => /~[^\s]+/,
 
-    comment: _ => token(/\( [^)]* \)/),
+    comment: _ => prec(100, token(/\( [^)]* \)/)),
 
     open_bracket: _ => '[',
 
